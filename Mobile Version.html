@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arab Dream - Gastronomía Árabe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset y estilos base para móvil */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        
+        /* Container optimizado para móvil */
+        .container {
+            width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+        
+        /* Header móvil */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: #D4AF37;
+            font-size: 1.8rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .logo span {
+            color: #D4AF37;
+        }
+        
+        /* Menú hamburguesa */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* Navegación móvil */
+        nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #1a1a1a;
+            padding: 80px 20px 20px;
+            transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            z-index: 999;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+        }
+        
+        nav.active {
+            right: 0;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+        
+        nav.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        nav.active li:nth-child(1) { transition-delay: 0.1s; }
+        nav.active li:nth-child(2) { transition-delay: 0.2s; }
+        nav.active li:nth-child(3) { transition-delay: 0.3s; }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        nav a:hover,
+        nav a.active {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-left-color: #D4AF37;
+            color: #D4AF37;
+        }
+        
+        /* Overlay para cerrar menú */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero section móvil */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #F5F5DC;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #D4AF37;
+            color: #1a1a1a;
+            padding: 14px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: auto;
+            max-width: 250px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background-color: #B8860B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Sección menú móvil */
+        .seccion-menu {
+            padding: 50px 0;
+            background-color: white;
+        }
+        
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 0 15px;
+        }
+        
+        .titulo-seccion h2 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            display: inline-block;
+            padding-bottom: 12px;
+            position: relative;
+        }
+        
+        .titulo-seccion h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #D4AF37;
+        }
+        
+        /* Filtro de categorías móvil */
+        .filtro-categorias {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 8px;
+            margin-bottom: 25px;
+            padding: 10px 15px 15px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .filtro-categorias::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .btn-categoria {
+            padding: 10px 18px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .btn-categoria:hover,
+        .btn-categoria.active {
+            background-color: #D4AF37;
+            color: #1a1a1a;
+            border-color: #D4AF37;
+            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Grid de menú móvil */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 15px;
+        }
+        
+        .item-menu {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .item-menu:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .item-imagen {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .item-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .item-menu:hover .item-imagen img {
+            transform: scale(1.05);
+        }
+        
+        .item-info {
+            padding: 18px;
+        }
+        
+        .item-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+        
+        .precio {
+            color: #D4AF37;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+        
+        .item-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Estilos especiales para categorías */
+        .item-dulce-especial {
+            background-color: #fff9f0;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .item-ensalada-especial {
+            background-color: #f0fff4;
+            border: 2px solid rgba(0, 128, 0, 0.1);
+        }
+        
+        .item-cuscus-especial {
+            background-color: #fff5e6;
+            border: 2px solid rgba(255, 165, 0, 0.1);
+        }
+        
+        /* Footer móvil */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #D4AF37;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #D4AF37;
+        }
+        
+        .footer-col p, .footer-col li {
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li i {
+            color: #D4AF37;
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #D4AF37;
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+            padding: 20px 15px 0;
+        }
+        
+        /* Botón flotante para volver arriba */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #D4AF37;
+            color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #B8860B;
+            transform: translateY(-3px);
+        }
+        
+        /* Mejoras de scroll suave en móvil */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Ajustes para pantallas muy pequeñas */
+        @media (max-width: 360px) {
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .titulo-seccion h2 {
+                font-size: 1.6rem;
+            }
+            
+            .grid-menu {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-info h3 {
+                font-size: 1.1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .precio {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+        
+        /* Ajustes para tablets pequeñas */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+            
+            .hero {
+                padding: 140px 40px 100px;
+                min-height: 60vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .grid-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .menu-toggle {
+                display: none;
+            }
+            
+            nav {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+                overflow: visible;
+            }
+            
+            nav ul {
+                display: flex;
+                gap: 20px;
+            }
+            
+            nav li {
+                margin: 0;
+                opacity: 1;
+                transform: none;
+            }
+            
+            nav a {
+                padding: 8px 0;
+                border-left: none;
+                position: relative;
+            }
+            
+            nav a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: #D4AF37;
+                transition: width 0.3s;
+            }
+            
+            nav a:hover::after,
+            nav a.active::after {
+                width: 100%;
+            }
+            
+            .menu-overlay {
+                display: none;
+            }
+        }
+        
+        /* Ajustes para tablets grandes y desktop */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .grid-menu {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Ajustes para desktop grande */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+        
+        /* Estado de carga para imágenes */
+        .item-imagen {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-moon"></i>
+                <h1>Arab <span>Dream</span></h1>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#inicio" class="active">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu-overlay" id="menuOverlay"></div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h2>Una Experiencia Culinaria Árabe</h2>
+            <p>Sumérgete en los sabores exóticos de Oriente Medio en nuestro exclusivo restaurante. Desde tradicionales cuscús hasta exquisitos tés y dulces, cada plato es una obra maestra culinaria.</p>
+            <a href="#menu" class="btn">Ver Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección Menú Completo -->
+    <section class="seccion-menu" id="menu">
+        <div class="container">
+            <div class="titulo-seccion">
+                <h2>Nuestra Carta</h2>
+            </div>
+            
+            <!-- Filtro de categorías -->
+            <div class="filtro-categorias" id="filtroCategorias">
+                <!-- Las categorías se generan con JavaScript -->
+            </div>
+            
+            <!-- Contenedor de items del menú -->
+            <div class="grid-menu" id="contenedorMenu">
+                <!-- Los items del menú se generan con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Arab Dream</h3>
+                    <p>Un viaje culinario por los sabores más exquisitos de Oriente Medio. Donde la tradición se encuentra con la elegancia.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Horario</h3>
+                    <ul>
+                        <li><i class="far fa-clock"></i> Lunes - Viernes: 12:00 - 23:00</li>
+                        <li><i class="far fa-clock"></i> Sábados: 12:00 - 00:00</li>
+                        <li><i class="far fa-clock"></i> Domingos: 12:00 - 22:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Alhambra, 24, Madrid</li>
+                        <li><i class="fas fa-phone"></i> +34 91 123 45 67</li>
+                        <li><i class="fas fa-envelope"></i> info@arabdream.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Arab Dream. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón para volver arriba -->
+    <a href="#inicio" class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Datos del menú (versión reducida para demo)
+        const menuItems = [
+            // Ensaladas/Entrantes (ejemplos)
+            { 
+                id: 1, 
+                categoria: "ensalada", 
+                nombre: "PASTEL DE POLLO", 
+                precio: "3.50€", 
+                descripcion: "Delicioso pastel relleno de pollo y especias árabes.", 
+                imagen: "https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 2, 
+                categoria: "ensalada", 
+                nombre: "BRIWAT KEFTA", 
+                precio: "3.30€", 
+                descripcion: "Briwat relleno de kefta (carne picada especiada).", 
+                imagen: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            
+            // Dulces (ejemplos)
+            { 
+                id: 3, 
+                categoria: "dulce", 
+                nombre: "BAKLAWA", 
+                precio: "2€", 
+                descripcion: "Baklava tradicional con nueces y almíbar de miel.", 
+                imagen: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 4, 
+                categoria: "dulce", 
+                nombre: "CHEBAKIA", 
+                precio: "1€", 
+                descripcion: "Dulce frito con miel y sésamo.", 
+                imagen: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            
+            // Cuscús (ejemplos)
+            { 
+                id: 5, 
+                categoria: "cuscus", 
+                nombre: "CUSCÚS DE POLLO", 
+                precio: "12€", 
+                descripcion: "Cuscús tradicional con pollo, verduras y garbanzos.", 
+                imagen: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 6, 
+                categoria: "cuscus", 
+                nombre: "CUSCÚS DE CORDERO", 
+                precio: "17€", 
+                descripcion: "Cuscús con cordero tierno, ciruelas y almendras.", 
+                imagen: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            
+            // Tajín (ejemplos)
+            { 
+                id: 7, 
+                categoria: "tajin", 
+                nombre: "TERNERA", 
+                precio: "14€", 
+                descripcion: "Tajín de ternera con verduras y especias tradicionales.", 
+                imagen: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 8, 
+                categoria: "tajin", 
+                nombre: "POLLO", 
+                precio: "10€", 
+                descripcion: "Tajín de pollo con limón confitado y aceitunas.", 
+                imagen: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            
+            // Platos principales (ejemplos)
+            { 
+                id: 9, 
+                categoria: "platos", 
+                nombre: "ARROZ CON POLLO", 
+                precio: "15€", 
+                descripcion: "Arroz con pollo y especias árabes.", 
+                imagen: "https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 10, 
+                categoria: "platos", 
+                nombre: "FALAFEL GARBANZOS", 
+                precio: "10€", 
+                descripcion: "Falafel de garbanzos con arroz y ensalada.", 
+                imagen: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            
+            // Bebidas (ejemplos)
+            { 
+                id: 11, 
+                categoria: "bebidas-frias", 
+                nombre: "TÉ MARROQUÍ", 
+                precio: "1.80€", 
+                descripcion: "Té marroquí tradicional con hierbabuena.", 
+                imagen: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            },
+            { 
+                id: 12, 
+                categoria: "bebidas-frias", 
+                nombre: "CAFÉ ÁRABE", 
+                precio: "1.50€", 
+                descripcion: "Café árabe especiado con cardamomo.", 
+                imagen: "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            }
+        ];
+
+        // Categorías para el filtro
+        const categorias = [
+            { id: "todo", nombre: "Todo" },
+            { id: "dulce", nombre: "Dulces" },
+            { id: "ensalada", nombre: "Entrantes" },
+            { id: "cuscus", nombre: "Cuscús" },
+            { id: "tajin", nombre: "Tajín" },
+            { id: "platos", nombre: "Platos" },
+            { id: "bebidas-frias", nombre: "Bebidas" }
+        ];
+
+        // Inicialización cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const contenedorMenu = document.getElementById('contenedorMenu');
+            const filtroCategorias = document.getElementById('filtroCategorias');
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Generar filtro de categorías
+            categorias.forEach(categoria => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-categoria';
+                btn.textContent = categoria.nombre;
+                btn.dataset.categoria = categoria.id;
+                btn.setAttribute('aria-label', `Filtrar por ${categoria.nombre}`);
+                
+                if (categoria.id === 'todo') {
+                    btn.classList.add('active');
+                }
+                
+                btn.addEventListener('click', () => {
+                    // Remover clase active de todos los botones
+                    document.querySelectorAll('.btn-categoria').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Agregar clase active al botón clickeado
+                    btn.classList.add('active');
+                    
+                    // Filtrar menú
+                    filtrarMenu(categoria.id);
+                    
+                    // Scroll suave a la sección de menú
+                    document.getElementById('menu').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+                
+                filtroCategorias.appendChild(btn);
+            });
+            
+            // Generar todos los items del menú inicialmente
+            generarItemsMenu(menuItems);
+            
+            // Función para generar los items del menú
+            function generarItemsMenu(items) {
+                contenedorMenu.innerHTML = '';
+                
+                if (items.length === 0) {
+                    contenedorMenu.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: #666;">
+                            <i class="fas fa-utensils" style="font-size: 3rem; margin-bottom: 20px; color: #D4AF37;"></i>
+                            <h3 style="margin-bottom: 10px;">No hay platos en esta categoría</h3>
+                            <p>Prueba con otra categoría</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                items.forEach(item => {
+                    const itemMenu = document.createElement('div');
+                    itemMenu.className = 'item-menu';
+                    itemMenu.dataset.categoria = item.categoria;
+                    
+                    // Añadir clase especial para categorías
+                    if (item.categoria === 'dulce') {
+                        itemMenu.classList.add('item-dulce-especial');
+                    } else if (item.categoria === 'ensalada') {
+                        itemMenu.classList.add('item-ensalada-especial');
+                    } else if (item.categoria === 'cuscus') {
+                        itemMenu.classList.add('item-cuscus-especial');
+                    }
+                    
+                    // Lazy loading para imágenes
+                    const img = new Image();
+                    img.src = item.imagen;
+                    img.alt = item.nombre;
+                    img.loading = 'lazy';
+                    
+                    itemMenu.innerHTML = `
+                        <div class="item-imagen">
+                            <img src="${item.imagen}" alt="${item.nombre}" loading="lazy">
+                        </div>
+                        <div class="item-info">
+                            <h3>${item.nombre} <span class="precio">${item.precio}</span></h3>
+                            <p>${item.descripcion}</p>
+                        </div>
+                    `;
+                    
+                    contenedorMenu.appendChild(itemMenu);
+                });
+            }
+            
+            // Función para filtrar el menú por categoría
+            function filtrarMenu(categoria) {
+                if (categoria === 'todo') {
+                    generarItemsMenu(menuItems);
+                } else {
+                    const itemsFiltrados = menuItems.filter(item => item.categoria === categoria);
+                    generarItemsMenu(itemsFiltrados);
+                }
+            }
+            
+            // Toggle del menú móvil
+            menuToggle.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+            
+            function toggleMenu() {
+                navMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                
+                // Bloquear scroll cuando el menú está abierto
+                if (navMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // Cerrar menú al hacer clic en un enlace
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    // Actualizar clase activa
+                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+            
+            // Mostrar/ocultar botón "volver arriba"
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Para móviles, cerramos el menú si está abierto
+                        if (navMenu.classList.contains('active')) {
+                            toggleMenu();
+                        }
+                        
+                        // Scroll suave
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mejorar rendimiento en scroll
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        // Aquí podríamos agregar efectos de parallax si los tuviéramos
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Prevenir zoom en input en iOS
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                    document.body.style.fontSize = '16px';
+                }
+            });
+            
+            document.addEventListener('focusout', function() {
+                setTimeout(() => {
+                    document.body.style.fontSize = '';
+                }, 100);
+            });
+            
+            // Cargar imágenes con lazy loading
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+            
+            // Inicializar menú con la primera categoría activa
+            filtrarMenu('todo');
+        });
+    </script>
+</body>
+</html>
